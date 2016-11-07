@@ -6,6 +6,7 @@ public class LuhnAlgorithm {
     private ArrayList<Integer> even;
     private Character c;
     private int sum;
+    private boolean isEven;
 
     public LuhnAlgorithm() {
 
@@ -15,16 +16,20 @@ public class LuhnAlgorithm {
         odd = new ArrayList<>();
         even = new ArrayList<>();
         sum = 0;
+        isEven = false;
 
         sb = new StringBuilder(number);
         sb.reverse();
         addToList();
         sumLists();
         int answer;
-        if (sum%10 != 0) {
+        if (sum % 10 != 0) {
             answer = 10 - sum % 10;
-        }else {
+        } else {
             answer = 0;
+        }
+        if (isEven) {
+            answer = answer/2;
         }
         return answer;
     }
@@ -33,8 +38,8 @@ public class LuhnAlgorithm {
         for (int i = 0; i < sb.length(); i++) {
             c = sb.charAt(i);
 
-            if (Character.isDigit(c)) {
-                if ((i % 2) == 1) {
+            if ((i % 2) == 1) {
+                if (Character.isDigit(c)) {
                     int v = Character.getNumericValue(c);
                     v = v * 2;
 
@@ -42,13 +47,18 @@ public class LuhnAlgorithm {
                         v = v % 10 + 1;
                     }
                     even.add(v);
-
                 } else {
-                    odd.add(Character.getNumericValue(c));
+                    isEven = true;
                 }
 
+            } else {
+                if (Character.isDigit(c)) {
+                    odd.add(Character.getNumericValue(c));
+                }
             }
+
         }
+
     }
 
     private void sumLists() {
@@ -59,6 +69,7 @@ public class LuhnAlgorithm {
         for (int i = 0; i < even.size(); i++) {
             sum += even.get(i);
         }
+        System.out.println(sum);
 
     }
 
