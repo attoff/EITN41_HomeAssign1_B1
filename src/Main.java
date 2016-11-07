@@ -1,19 +1,17 @@
-
-
+import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String [ ] args){
+    public static void main(String[] args) {
 
-        String test = "12774212857X4109";
-
+        Parser parser = new Parser();
+        ArrayList<String> list = new ArrayList<>();
+        list = parser.parse();
         LuhnAlgorithm LA = new LuhnAlgorithm();
-        int x = LA.calculate(test);
-        StringBuilder result = new StringBuilder(x);
-        System.out.println(x);
-        System.out.println(result.toString());
-
-
+        for (String x : list) {
+            int result = LA.calculate(x);
+            System.out.print(result);
+        }
 
 
     }

@@ -20,7 +20,12 @@ public class LuhnAlgorithm {
         sb.reverse();
         addToList();
         sumLists();
-        int answer = 10 - sum % 10;
+        int answer;
+        if (sum%10 != 0) {
+            answer = 10 - sum % 10;
+        }else {
+            answer = 0;
+        }
         return answer;
     }
 
@@ -36,13 +41,10 @@ public class LuhnAlgorithm {
                     if (v > 9) {
                         v = v % 10 + 1;
                     }
-
                     even.add(v);
-                    System.out.println("Even is " + v);
 
                 } else {
                     odd.add(Character.getNumericValue(c));
-                    System.out.println("Odd is " + c);
                 }
 
             }
